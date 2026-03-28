@@ -17,45 +17,58 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Login',
       home: Scaffold(
-        appBar: AppBar(
-          leading: Image.asset("assets/images/logo.png"),
-          title: Text("Login Page"),
-        ),
-        body: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                labelText: "E-Mail",
-                border: OutlineInputBorder(),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 16),
+                  Image.asset(
+                    'assets/images/logo.png',
+                    height: 100,
+                  ),
+                  const SizedBox(height: 32),
+                  TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'Username',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  TextField(
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Password',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: isChecked,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isChecked = value ?? false;
+                          });
+                        },
+                      ),
+                      const Text('Remember me'),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('Login'),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 20),
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: "Password",
-                border: OutlineInputBorder(),
-              ),
-            ),
-            Row(
-              children: [
-                Text("Remember me"),
-                Checkbox(
-                  value: isChecked,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isChecked = value ?? false;
-                    });
-                  },
-                ),
-              ],
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("Login"),
-            ),          // ← only ONE closing paren ✓
-          ],
+          ),
         ),
       ),
     );
